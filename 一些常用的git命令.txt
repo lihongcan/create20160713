@@ -1,0 +1,115 @@
+git init 初始化一个目录为仓库，初始化后git能管理该目录
+
+ls -ah 查看.git目录，默认该目录是隐藏的\
+
+git add xxx.xxx 把一个文件添加到仓库
+
+git comint -m "comint info" 把文件提交到仓库   
+ 注：可以多次add文件后 一次性commit提交
+ 
+git status 查看状态
+git diff xxxx.xxx 查看某个文件的具体修改
+
+git log 查看提交记录  可以加参数 --pretty=oneline让输出结果一行显示
+
+注 commit id ：SHA1计算出来的非常大的数字，十六进制表示
+
+git reset --hard HEAD^ 回退到上一个版本 HEAD表示当前版本，上一个版本HEAD^   上10个版本可以写成HEAD~10
+git  reset --hard 32054(commit id)  回退到指定的版本号，版本号可以只写前面几位，git会自动查找
+
+cat xxxxx.xxx 查看某个文件的具体内容
+
+git reflog 查看命令记录
+
+git相关概念:
+    工作区：电脑中能看到的目录
+	版本库：.git目录，就是git的版本库 包含重要的暂存区(stage/index)、git自动为我们创建的master分支，以及指向master的指针HEAD
+	把文件添加到版本库的时候分两步：
+	   1：使用git add将文件提交到暂存区
+	   2：使用git commit提交改动，实际就是把add命令添加到暂存区的文件提交到当前分支
+git 管理的是修改，没有add到暂存区的修改，commit的时候不会提交到分支 比如 第一次修改-->add-->第二次修改-->commit-->只提交了第一次修改的到分支
+
+git checkout --readme.txt 把该文件在工作区的修改全部撤销
+    这里有2中情况：1、文件修改后还没有使用git add提交到暂存区  撤销后回到和版本库一样的状态
+					2、已经提交到暂存区，然后又做了修改，撤销后回到和add后一样的状态
+git reset HEAD readme.txt  将以提交到暂存区的文件撤销add，然后可以再使用git checkout --readme.txt将修改撤销
+
+rm test.txt  在工作区中删除一个文件 如果要从版本库中恢复，可以使用命令 git checkout --test.txt 如果要删除版本库中的文件，使用 git rm test.txt 然后 commit
+ssh-keygen -t rsa -C"598753743@qq.com"  该命令用于创建sshkey 将pubkey 添加到github后就可以从该电脑往github推送
+
+git remote origin https://github.com/lihongcan/create20160713.git  将本地仓库和远程仓库关联
+git push -u origin master 首次推送到远程仓库
+git push origin master 之后推送可以不使用-u
+
+git clone git@github:lihongcan/create20160713.git 克隆远程仓库命令
+
+git checkout -b dev  创建分支dev  -b参数的意思是创建并切换到dev分支 相当于命令  git branch dev  及git checkout dev
+
+git branch 查看当前分支
+
+git merge dev  将dev分支合并到当前分支上  如当前分支是master 就将dev合并到master上
+   合并模式：1 fast-forward 快进模式
+合并分支的时候 如果有冲突的文件，需要修改文件解决冲突后 add、commit
+git merge --no-ff -m "merge with no-ff" dev 不使用fast-forward模式合并分支，这样可以看到分支记录，合并的时候会产生新的提交
+    
+git branch -d dev 删除dev分支 
+如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
+
+git stash 暂存工作内容
+git stash list 查看暂存
+git stash pop 恢复的同时删除暂存的内容 一般是在需要修复bug的时候 暂存当前的工作内容，新建bug分支去修复bug，bug修复完成后切换到当前分支 恢复暂存，继续工作
+
+git  remote -v 查看远程仓库信息
+origin  https://github.com/lihongcan/create20160713.git (fetch)
+origin  https://github.com/lihongcan/create20160713.git (push)
+如果没有推送权限，就看不到push的地址。
+
+git pull 从远程仓库拉去更新
+ 如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream branch-name origin/branch-name。
+ 在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+
+命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+
+git tag -a <tagname> -m "blablabla..."可以指定标签信息；
+
+git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
+
+命令git tag可以查看所有标签。
+
+命令git push origin <tagname>可以推送一个本地标签；
+
+命令git push origin --tags可以推送全部未推送过的本地标签；
+
+命令git tag -d <tagname>可以删除一个本地标签；
+
+命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
