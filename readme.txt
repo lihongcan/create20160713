@@ -6,4 +6,5 @@ git test modify after add
 创建一个新的分支dev
 在master分支上修改
 创建一个新的分支feature1
+测试-不使用fast-forward方式合并分支
 
